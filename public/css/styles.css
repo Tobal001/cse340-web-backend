@@ -1,6 +1,196 @@
-/******* Change Box Model ***************/
+
+/* ***********************
+ * Global
+ *************************/
+ /******* Change Box Model ***************/
 *,
 *:before,
 *:after {
   box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url("/images/site/checkerboard.jpg");
+}
+
+:root {
+  /* Primary color: Deep navy for headers and main accents */
+  --primary-color: #0C234B;
+  
+  /* Secondary color: Crisp white for clean backgrounds */
+  --secondary-color: #FFFFFF;
+  
+  /* Accent color: Bold red for call-to-action buttons and highlights */
+  --accent-color: #00b8b8;
+  
+  /* Neutral color: Light gray for subtle backgrounds or borders */
+  --neutral-color: #F5F5F5;
+  
+  /* Text color: Dark gray for easy-to-read text */
+  --text-color: #000000;
+
+  --primary-font: "Outfit", sans-serif;
+}
+
+#wrapper {
+  background-color: #FFFFFF;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--primary-font);
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+p, a, li {
+  font-family: var(--primary-font);
+  color: var(--primary-color);
+
+}
+
+/* ***********************
+ * Header
+ *************************/
+ #top-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+ }
+.siteName a {
+  font-family: var(--primary-font);
+  text-decoration: none;
+  color: var(--primary-color);
+  font-weight: 700;
+  font-size: xxx-large;
+}
+
+.tools a{
+  font-family: var(--primary-font);
+  text-decoration: none;
+  color: var(--primary-color);
+}
+
+/* ***********************
+ * Navigation
+ *************************/
+.nav-ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  list-style: none;
+  font-family: var(--primary-font);
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  padding: 1.5rem;
+ }
+
+.nav-ul li {
+  color: #FFFFFF;
+ }
+
+li:hover {
+  cursor: pointer;
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+}
+
+/* ***********************
+ * Index
+*************************/
+
+/******* Hero banner ***************/
+ .hero-banner {
+  grid-area: hero;
+ }
+ 
+ .cta {
+  width: 100%;
+  height: 300px;
+  background-image: url('/images/vehicles/delorean.jpg');
+  background-repeat: no-repeat;
+} 
+
+ .cta-content {
+  background-color: #ffffffd8;
+  width: 200px;
+  height: auto;
+  padding: 1rem;
+  color: var(--accent-color);
+ }
+
+ .cta-content p {
+  margin: 0;
+  font-weight: 500;
+ }
+
+ .btn {
+  display:  inline-block;
+  text-decoration: none;
+  padding: 0.5em 1em;
+  margin-top: 1em;
+  font-weight: 700;
+  background-color: var(--accent-color);
+  color: var(--text-color);
+}
+
+/******* Reviews***************/
+.reviews {
+  grid-area: reviews;
+}
+  .review-list li {
+    margin: 1em 0;
+  }
+
+/******* Delorean Upgrades***************/
+  .parts {
+    grid-area: parts;
+  }
+  .parts-list {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 10px;
+    padding: 1rem;
+  }
+  .parts-list li {
+    text-align: center;
+    list-style: none;
+  }
+
+  .img-container {
+    background-color: var(--accent-color);
+    max-width: 250px;
+    height: 100px;
+    overflow: hidden;
+  }
+
+  .img-container img{
+    padding: 1rem;
+}
+
+
+@media screen and (min-width:768px) {
+
+.nav-ul {
+  padding: .5em;
+}
+
+  #wrapper {
+    max-width: 768px;
+    margin: 1em auto;
+    padding: 20px;
+    border-radius: 1em;
+    border-style:outset;
+    border-color:  var(--accent-color);
+  }
+  main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+    "hero hero"
+    "parts reviews"
+    ;
+  }
+
 }
