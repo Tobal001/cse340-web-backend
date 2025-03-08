@@ -16,19 +16,14 @@ body {
 }
 
 :root {
-  /* Primary color: Deep navy for headers and main accents */
   --primary-color: #0C234B;
-  
-  /* Secondary color: Crisp white for clean backgrounds */
+
   --secondary-color: #FFFFFF;
   
-  /* Accent color: Bold red for call-to-action buttons and highlights */
   --accent-color: #00b8b8;
   
-  /* Neutral color: Light gray for subtle backgrounds or borders */
   --neutral-color: #F5F5F5;
   
-  /* Text color: Dark gray for easy-to-read text */
   --text-color: #000000;
 
   --primary-font: "Outfit", sans-serif;
