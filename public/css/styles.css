@@ -29,6 +29,10 @@ body {
   --primary-font: "Outfit", sans-serif;
 }
 
+main {
+  padding-left: 1em;
+}
+
 #wrapper {
   background-color: #FFFFFF;
 }
@@ -48,11 +52,13 @@ p, a, li {
 /* ***********************
  * Header
  *************************/
- #top-header {
+
+#top-header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
- }
+  padding: 1em 1em 0;
+}
 .siteName a {
   font-family: var(--primary-font);
   text-decoration: none;
@@ -79,11 +85,11 @@ p, a, li {
   background-color: var(--primary-color);
   color: var(--secondary-color);
   padding: 1.5rem;
- }
+}
 
 .nav-ul li {
   color: #FFFFFF;
- }
+}
 
 li:hover {
   cursor: pointer;
@@ -93,12 +99,12 @@ li:hover {
 
 /* ***********************
  * Index
-*************************/
+ *************************/
 
 /******* Hero banner ***************/
- .hero-banner {
+.hero-banner {
   grid-area: hero;
- }
+}
  
  .cta {
   width: 100%;
