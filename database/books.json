@@ -1,0 +1,290 @@
+[
+  {
+    "title": "Mere Christianity",
+    "publishedYear": 1952,
+    "genres": [
+      "Christian apologetics",
+      "Theology"
+    ],
+    "summary": "A classic defense of the Christian faith, drawing from Lewis's wartime radio broadcasts.",
+    "authorId": {
+      "$oid": "67e44723ce620d828ce2abbe"
+    }
+  },
+  {
+    "title": "The Great Divorce",
+    "publishedYear": 1945,
+    "genres": [
+      "Christian fiction",
+      "Theology"
+    ],
+    "summary": "An allegorical tale exploring the afterlife and the nature of heaven and hell.",
+    "authorId": {
+      "$oid": "67e44723ce620d828ce2abbe"
+    }
+  },
+  {
+    "title": "The Chronicles of Narnia: The Lion, the Witch and the Wardrobe",
+    "publishedYear": 1950,
+    "genres": [
+      "Fantasy",
+      "Children's Literature"
+    ],
+    "summary": "Four children enter a magical world where they join the fight against a dark queen.",
+    "authorId": {
+      "$oid": "67e44723ce620d828ce2abbe"
+    }
+  },
+  {
+    "title": "The Hobbit",
+    "publishedYear": 1937,
+    "genres": [
+      "Fantasy",
+      "Adventure"
+    ],
+    "summary": "Bilbo Baggins sets out on an unexpected journey to reclaim a mountain from a dragon.",
+    "authorId": {
+      "$oid": "67e44723ce620d828ce2abbf"
+    }
+  },
+  {
+    "title": "The Fellowship of the Ring",
+    "publishedYear": 1954,
+    "genres": [
+      "Fantasy",
+      "Epic"
+    ],
+    "summary": "The first part of The Lord of the Rings, where Frodo begins his quest to destroy the One Ring.",
+    "authorId": {
+      "$oid": "67e44723ce620d828ce2abbf"
+    }
+  },
+  {
+    "title": "The Silmarillion",
+    "publishedYear": 1977,
+    "genres": [
+      "Fantasy",
+      "Mythology"
+    ],
+    "summary": "A posthumous collection of mythopoeic stories about the creation and early ages of Middle-earth.",
+    "authorId": {
+      "$oid": "67e44723ce620d828ce2abbf"
+    }
+  },
+  {
+    "title": "Crime and Punishment",
+    "publishedYear": 1866,
+    "genres": [
+      "Philosophical fiction",
+      "Psychological fiction"
+    ],
+    "summary": "A troubled young man commits murder and wrestles with guilt and morality.",
+    "authorId": {
+      "$oid": "67e44723ce620d828ce2abc0"
+    }
+  },
+  {
+    "title": "The Brothers Karamazov",
+    "publishedYear": 1880,
+    "genres": [
+      "Philosophical fiction",
+      "Family drama"
+    ],
+    "summary": "A profound exploration of faith, free will, and morality through the lives of three brothers.",
+    "authorId": {
+      "$oid": "67e44723ce620d828ce2abc0"
+    }
+  },
+  {
+    "title": "Notes from Underground",
+    "publishedYear": 1864,
+    "genres": [
+      "Existential fiction",
+      "Psychological fiction"
+    ],
+    "summary": "A bitter and introspective monologue from an unnamed narrator living in isolation.",
+    "authorId": {
+      "$oid": "67e44723ce620d828ce2abc0"
+    }
+  },
+  {
+    "title": "Man and His Symbols",
+    "publishedYear": 1964,
+    "genres": [
+      "Psychology",
+      "Symbolism"
+    ],
+    "summary": "An accessible introduction to Jungian thought and the role of symbols in the psyche.",
+    "authorId": {
+      "$oid": "67e44723ce620d828ce2abc1"
+    }
+  },
+  {
+    "title": "Psychological Types",
+    "publishedYear": 1921,
+    "genres": [
+      "Psychology",
+      "Personality"
+    ],
+    "summary": "A foundational work that introduced Jung\u2019s theory of introversion and extraversion.",
+    "authorId": {
+      "$oid": "67e44723ce620d828ce2abc1"
+    }
+  },
+  {
+    "title": "The Archetypes and the Collective Unconscious",
+    "publishedYear": 1959,
+    "genres": [
+      "Psychology",
+      "Spirituality"
+    ],
+    "summary": "An in-depth exploration of the symbolic content of the human unconscious.",
+    "authorId": {
+      "$oid": "67e44723ce620d828ce2abc1"
+    }
+  },
+  {
+    "title": "The Varieties of Religious Experience",
+    "publishedYear": 1902,
+    "genres": [
+      "Philosophy",
+      "Psychology",
+      "Religion"
+    ],
+    "summary": "A pioneering psychological and philosophical study of religion and spirituality.",
+    "authorId": {
+      "$oid": "67e44723ce620d828ce2abc2"
+    }
+  },
+  {
+    "title": "Pragmatism: A New Name for Some Old Ways of Thinking",
+    "publishedYear": 1907,
+    "genres": [
+      "Philosophy"
+    ],
+    "summary": "A presentation of James's pragmatic philosophy, emphasizing truth as a process.",
+    "authorId": {
+      "$oid": "67e44723ce620d828ce2abc2"
+    }
+  },
+  {
+    "title": "The Principles of Psychology",
+    "publishedYear": 1890,
+    "genres": [
+      "Psychology",
+      "Philosophy"
+    ],
+    "summary": "An influential textbook that laid the foundation for modern psychology.",
+    "authorId": {
+      "$oid": "67e44723ce620d828ce2abc2"
+    }
+  },
+  {
+    "title": "The Shimmering Bridge",
+    "publishedYear": 2001,
+    "genres": [
+      "Fantasy",
+      "Symbolism"
+    ],
+    "summary": "A symbolic journey across realms of doubt and wonder, told through poetic fantasy.",
+    "authorId": {
+      "$oid": "67e44723ce620d828ce2abc3"
+    }
+  },
+  {
+    "title": "Ashes of the North",
+    "publishedYear": 2004,
+    "genres": [
+      "Theological fiction",
+      "Adventure"
+    ],
+    "summary": "An exiled sage battles the forces of spiritual decay in a world teetering on collapse.",
+    "authorId": {
+      "$oid": "67e44723ce620d828ce2abc3"
+    }
+  },
+  {
+    "title": "The Sky Library",
+    "publishedYear": 2007,
+    "genres": [
+      "Fantasy",
+      "Mysticism"
+    ],
+    "summary": "In a floating city of scrolls and stars, a boy unlocks the truths buried in forgotten stories.",
+    "authorId": {
+      "$oid": "67e44723ce620d828ce2abc3"
+    }
+  },
+  {
+    "title": "Letters to a Young Mormon",
+    "publishedYear": 2014,
+    "genres": [
+      "Theology",
+      "LDS literature"
+    ],
+    "summary": "A modern take on faith, agency, and discipleship written to inspire young Latter-day Saints.",
+    "authorId": {
+      "$oid": "67e44723ce620d828ce2abc4"
+    }
+  },
+  {
+    "title": "Nothing New Under the Sun",
+    "publishedYear": 2020,
+    "genres": [
+      "Philosophy",
+      "Scripture commentary"
+    ],
+    "summary": "A poetic paraphrase and meditation on the book of Ecclesiastes.",
+    "authorId": {
+      "$oid": "67e44723ce620d828ce2abc4"
+    }
+  },
+  {
+    "title": "Future Mormon",
+    "publishedYear": 2016,
+    "genres": [
+      "Theology",
+      "Philosophy"
+    ],
+    "summary": "Thought-provoking essays exploring grace, history, and LDS identity.",
+    "authorId": {
+      "$oid": "67e44723ce620d828ce2abc4"
+    }
+  },
+  {
+    "title": "The Inexhaustible Gospel",
+    "publishedYear": 1992,
+    "genres": [
+      "Christian theology",
+      "LDS literature"
+    ],
+    "summary": "A powerful collection of discourses on the Savior, personal discipleship, and divine love.",
+    "authorId": {
+      "$oid": "67e44723ce620d828ce2abc5"
+    }
+  },
+  {
+    "title": "Not My Will, But Thine",
+    "publishedYear": 1988,
+    "genres": [
+      "Christian theology",
+      "Spirituality"
+    ],
+    "summary": "Reflections on submitting to the Lord\u2019s will and walking the path of faith.",
+    "authorId": {
+      "$oid": "67e44723ce620d828ce2abc5"
+    }
+  },
+  {
+    "title": "Meek and Lowly",
+    "publishedYear": 1987,
+    "genres": [
+      "Christian theology",
+      "LDS literature"
+    ],
+    "summary": "Insights on humility and the quiet strength of discipleship.",
+    "authorId": {
+      "$oid": "67e44723ce620d828ce2abc5"
+    }
+  }
+]

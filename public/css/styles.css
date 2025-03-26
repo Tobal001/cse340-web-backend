@@ -87,8 +87,9 @@ p, a, li {
   padding: 1.5rem;
 }
 
-.nav-ul li {
+ul li a{
   color: #FFFFFF;
+  text-decoration: none;
 }
 
 li:hover {
