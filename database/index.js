@@ -21,7 +21,7 @@ if (process.env.NODE_ENV === "development") {
     // Configure SSL as needed for your production provider
     ssl: {
       // For some providers like Render, you might still need:
-      rejectUnauthorized: false,
+      rejectUnauthorized: true,
       // Or if using a trusted certificate:
       // rejectUnauthorized: true,
     },
