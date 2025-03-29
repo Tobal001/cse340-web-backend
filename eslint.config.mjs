@@ -1,11 +1,11 @@
-import { defineConfig } from "eslint/config";
-import globals from "globals";
-import js from "@eslint/js";
+import { defineConfig } from 'eslint/config';
+import globals from 'globals';
+import js from '@eslint/js';
 
 export default defineConfig([
   // Apply to all JS-related files
   {
-    files: ["**/*.{js,mjs,cjs}"],
+    files: ['**/*.{js,mjs,cjs}'],
     languageOptions: {
       // Use Node globals instead of browser globals so that process is defined
       globals: globals.node,
@@ -13,22 +13,22 @@ export default defineConfig([
   },
   // For .js files, set source type to CommonJS
   {
-    files: ["**/*.js"],
+    files: ['**/*.js'],
     languageOptions: {
-      sourceType: "commonjs",
+      sourceType: 'commonjs',
     },
   },
   // For .mjs files, set source type to module
   {
-    files: ["**/*.mjs"],
+    files: ['**/*.mjs'],
     languageOptions: {
-      sourceType: "module",
+      sourceType: 'module',
     },
   },
   // Apply recommended rules using @eslint/js plugin
   {
-    files: ["**/*.{js,mjs,cjs}"],
+    files: ['**/*.{js,mjs,cjs}'],
     plugins: { js },
-    extends: ["js/recommended"],
+    extends: ['js/recommended'],
   },
 ]);

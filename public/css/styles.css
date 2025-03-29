@@ -29,7 +29,7 @@ body {
 }
 
 main {
-  padding-left: 1em;
+  padding: 0 1em;
 }
 
 #wrapper {
@@ -179,18 +179,18 @@ li:hover {
 /* ***********************
  * Inventory Cards
  *************************/
- .inventory {
+.inventory {
   display: flex;
   flex-direction: column;
- }
- 
- #inv-display {
+}
+
+#inv-display {
   display: grid;
   grid-template-columns: 1fr;
   justify-content: center;
- }
+}
 
- #inv-display li {
+#inv-display li {
   max-width: 300px;
   background-color: #ffffff;
   border: 1px solid #ddd;
@@ -199,15 +199,15 @@ li:hover {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   margin: 1rem;
   transition: transform 0.3s ease;
- }
+}
 
 #inv-display li:hover {
   transform: scale(1.02);
 }
 
 #inv-display a {
-text-decoration: none;
-color: var(--primary-color);
+  text-decoration: none;
+  color: var(--primary-color);
 }
 
 #inv-display img {
@@ -235,6 +235,29 @@ color: var(--primary-color);
   color: #333;
 }
 
+/* ***********************
+ * Inventory Details
+ *************************/
+.vehicle-container {
+  display: grid;
+}
+
+.vehicle-container img {
+  width: 100%;
+  display: block;
+  grid-area: 'img';
+}
+
+.vehicle-container h2 {
+  background-color:#d3d3d349;
+  padding: 1rem;
+}
+
+.vehicle-info {
+  grid-area: 'details';
+}
+
+
 @media screen and (min-width: 768px) {
   .nav-ul {
     padding: 0.5em;
@@ -259,6 +282,13 @@ color: var(--primary-color);
   #inv-display {
     grid-template-columns: 1fr 1fr;
   }
-  
-}
 
+  .vehicle-container {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 'img details' ;
+  }
+
+  .vehicle-info {
+    margin-left: 1em;
+  }
+}
