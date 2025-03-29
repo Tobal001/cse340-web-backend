@@ -31,9 +31,16 @@ app.get('/', utilities.handleErrors(baseController.buildHome));
 //Inventory Route
 app.use('/inv', inventoryRoute);
 // File Not Found Route - must be last route in list
+app.get('/error-505', (req, res, next) => {
+  next({
+    status: 505,
+    message: 'HTTP Version Not Supported - simulated from footer link'
+  });
+});
 app.use(async (req, res, next) => {
   next({ status: 404, message: 'Sorry, we appear to have lost that page.' });
 });
+
 /* ***********************
  * Express Error Handler
  * Place after all other middleware
@@ -41,18 +48,26 @@ app.use(async (req, res, next) => {
 app.use(async (err, req, res, next) => {
   let nav = await utilities.getNav();
   console.error(`Error at: "${req.originalUrl}": ${err.message}`);
-  if (err.status == 404) {
+
+  let message;
+  let image;
+
+  if (err.status === 404 || err.status === 500) {
     message = err.message;
+  } else if (err.status === 505) {
+    // Instead of a message, show an image
+    image = '/images/site/crash.png'; 
   } else {
     message = 'Oh no! There was a crash. Maybe try a different route?';
   }
-  res.render('errors/error', {
+
+  res.status(err.status || 500).render('errors/error', {
     title: err.status || 'Server Error',
     message,
+    image,
     nav,
   });
 });
-
 /* ***********************
  * Local Server Information
  * Values from .env (environment) file
