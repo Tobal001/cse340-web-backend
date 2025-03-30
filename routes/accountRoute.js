@@ -8,4 +8,15 @@ const utilities = require('../utilities');
  *************************/
 router.get('/login', utilities.handleErrors(accountController.buildLogin));
 
+/* ***********************
+ * Deliver registration View
+ *************************/
+router.get('/registration', utilities.handleErrors(accountController.buildRegister));
+
+/* ***********************
+ * Deliver register View
+ *************************/
+router.post('/register', utilities.handleErrors(accountController.registerAccount))
+
+
 module.exports = router;

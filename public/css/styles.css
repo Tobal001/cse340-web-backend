@@ -259,8 +259,11 @@ li:hover {
 }
 
 /* ***********************
- * Account Login 
+ * Account Login/ Regestration 
  *************************/
+.account {
+  margin-bottom: 4rem;
+}
 form {
   background-color: var(--primary-color);
   max-width: 400px;
@@ -292,6 +295,20 @@ input:focus {
   border-color: #007bff;
   outline: none;
   box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+#passwordHelp {
+  background-color: #ffffff;
+  display: none; 
+  font-size: 0.9rem; 
+  color: #000000; 
+  margin-top: 0.5rem;
+  padding: 1rem;
+  border-radius: 6px;
+}
+
+#passwordHelp {
+  margin-top: 0.3rem;
 }
 
 

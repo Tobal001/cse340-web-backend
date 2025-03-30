@@ -7,8 +7,6 @@ const invCont = {};
 /* ***************************
  *  Build inventory by classification view
  * ************************** */
-// eslint-disable-next-line no-unused-vars
-
 invCont.buildByClassificationId = async function (req, res, next) {
   const classification_id = req.params.classificationId;
   const data = await invModel.getInventoryByClassificationId(classification_id);
