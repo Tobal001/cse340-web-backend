@@ -1,16 +1,25 @@
 <div class="account">
-    <h1>register</h1>
 
+    <h1>register</h1>
+    <% if (errors) { %>
+        <ul class="notice">
+       <% errors.array().forEach(error => { %>
+         <li><%= error.msg %></li>
+      <%  }) %>
+       </ul>
+      <% } %>
+
+    <p>All Fields Are Required*</p>
     <form id="registerForm" action="/account/register" method="post">
 
         <label for="account_firstname">First name:</label>
-        <input type="text" id="account_firstname" name="account_firstname" required>
+        <input type="text" name="account_firstname" id="accountFirstname" required value="<%= locals.account_firstname %>">
         
         <label for="account_lastname">Last name:</label>
-        <input type="text" id="account_lastname" name="account_lastname" required>
+        <input type="text" id="account_lastname" name="account_lastname" required value="<%= locals.account_lastname %>">
         
         <label for="account_email">Email:</label>
-        <input type="email" id="account_email" name="account_email" placeholder="example@email.com" required>
+        <input type="email" id="account_email" name="account_email" placeholder="example@email.com" required value="<%= locals.account_email %>">
         
         <label for="account_password">Password:</label>
         <input 
@@ -21,20 +30,24 @@
             pattern="(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{12,}"
             title="Must be at least 12 characters, include 1 capital letter, 1 number, and 1 special character"
         >
+        <!-- Toggle checkbox -->
+        <label>
+        <input type="checkbox" id="togglePassword">
+        Show password
+        </label>
     
-         <!-- Password rules message -->
-  <div id="passwordHelp">
-    Password must:
-    <ul>
-      <li>Be at least 12 characters</li>
-      <li>Contain at least 1 capital letter</li>
-      <li>Contain at least 1 number</li>
-      <li>Contain at least 1 special character</li>
-    </ul>
-  </div>
-
-  <br>
-  <input type="submit" value="Submit">
+        <!-- Password rules message -->
+        <div id="passwordHelp">
+            Password must:
+            <ul>
+            <li>Be at least 12 characters</li>
+            <li>Contain at least 1 capital letter</li>
+            <li>Contain at least 1 number</li>
+            <li>Contain at least 1 special character</li>
+            </ul>
+        </div>
+        <br>
+        <input type="submit" value="Submit">
     </form>
 
 <script src="/js/script.js"></script>

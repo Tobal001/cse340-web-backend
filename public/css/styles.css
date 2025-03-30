@@ -286,7 +286,7 @@ input[type="submit"] {
   width: 100%;
   padding: 0.75rem;
   margin-bottom: 1rem;
-  border: 1px solid #ccc;
+  border: 1.5px solid;
   border-radius: 6px;
   font-size: 1rem;
 }
@@ -296,6 +296,15 @@ input:focus {
   outline: none;
   box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
 }
+
+input:required:invalid, input:focus:invalid {
+  border-color: #ff0000;
+  background-color: #fdebeb;
+ }
+
+ input:required:valid {
+  border-color: #48ff00;
+ }
 
 #passwordHelp {
   background-color: #ffffff;
@@ -309,6 +318,10 @@ input:focus {
 
 #passwordHelp {
   margin-top: 0.3rem;
+}
+
+.notice li {
+  color: #ff0000;
 }
 
 

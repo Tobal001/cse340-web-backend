@@ -1,11 +1,30 @@
 <div class="account">
     <h1>Account Login</h1>
     <%- messages() %>
-    <form action="/account/login">
+    <form id="loginForm" action="/account/login" method="post">
         <label for="account_email">Email:</label>
-        <input type="text" id="account_email" name="account_email" placeholder="example@email.com">
+        <input type="email" id="account_email" name="account_email" placeholder="example@email.com" required value="<%= locals.account_email %>">
+
         <label for="account_password">Password:</label>
-        <input type="password" id="account_password" name="account_password"><br><br>
+        <input type="password" id="account_password" name="account_password" required><br><br>
+        
+        <!-- Toggle checkbox -->
+        <label>
+            <input type="checkbox" id="togglePassword">
+            Show password
+        </label>
+        
+        <!-- Password rules message -->
+        <div id="passwordHelp">
+            Password must:
+            <ul>
+            <li>Be at least 12 characters</li>
+            <li>Contain at least 1 capital letter</li>
+            <li>Contain at least 1 number</li>
+            <li>Contain at least 1 special character</li>
+            </ul>
+        </div>
+        <br>
         <input type="submit" value="Submit">
     </form>
     <p>No account? <a href="/account/registration">Sign-up</a></p>
