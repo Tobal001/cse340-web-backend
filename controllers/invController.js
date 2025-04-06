@@ -67,7 +67,6 @@ invCont.buildByInventoryByInvId = async function (req, res, next) {
 
     const vehicle = data[0];
 
-    // FIX APPLIED HERE 👇
     const grid = await utilities.buildInventoryGrid(vehicle);
     const nav = await utilities.getNav();
 
