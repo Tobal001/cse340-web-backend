@@ -259,7 +259,7 @@ li:hover {
 }
 
 /* ***********************
- * Account Login/ Regestration 
+ * Forms 
  *************************/
 .account {
   margin-bottom: 4rem;
@@ -321,7 +321,11 @@ input:required:invalid, input:focus:invalid {
 }
 
 .notice li {
-  color: #ff0000;
+  color: #1fbd00;
+}
+
+form p {
+  color: var(--secondary-color);
 }
 
 

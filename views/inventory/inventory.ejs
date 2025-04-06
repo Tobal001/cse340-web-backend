@@ -1,13 +1,18 @@
 <div class="inventory">
     <!-- Content Heading -->
     <% if (title) { %>
-        <h1 class="inv-h1"><%= title %></h1>
-        <% } else {
-        res.redirect('/')
-        } %>
-
-    <!-- Message Block -->
-    <% messages() %>
+      <h1 class="inv-h1"><%= title %></h1>
+  <% } %>
+  <!-- Message Block -->
+  <%- messages() %>
+  
+  <% if (errors && errors.length > 0) { %>
+    <ul class="notice">
+      <% errors.forEach(error => { %>
+        <li><%= error.msg %></li>
+      <% }) %>
+    </ul>
+  <% } %>
 
     <!-- Inventory Items Display -->
     <%- grid %>
