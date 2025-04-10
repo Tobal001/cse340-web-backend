@@ -25,7 +25,7 @@ validate.checkClassificationData = async (req, res, next) => {
       let nav = await utilities.getNav()
       let grid = await utilities.buildNewClassGrid()
 
-      res.render("inventory/inventory", {
+      res.render("./inventory/new-classification", {
         errors: errors.array(),
         title: "Add New Classification",
         nav,
@@ -86,7 +86,7 @@ validate.checkClassificationData = async (req, res, next) => {
     }
 
 /* ******************************
- * Check data and return errors or continue 
+ * Check inventory data and return errors or continue 
  * ***************************** */
 
 validate.checkInventoryData = async (req, res, next) => {
@@ -108,8 +108,10 @@ validate.checkInventoryData = async (req, res, next) => {
   if (!errors.isEmpty()) {
     let nav = await utilities.getNav();
 
-    // 🛠 FIXED: Pass form data as an object
-    let grid = await utilities.buildNewInventoryGrid({
+    res.render("./inventory/new-vehicle", {
+      errors: errors.array(),
+      title: "Add New Classification",
+      nav,
       classification_id,
       inv_make,
       inv_model,
@@ -121,12 +123,41 @@ validate.checkInventoryData = async (req, res, next) => {
       inv_miles,
       inv_color
     });
+    return;
+  }
 
-    res.render("inventory/inventory", {
+  next();
+};
+
+/* ******************************
+ * Check inventory data and return errors to edit view
+ * ***************************** */
+
+validate.checkUpdateData = async (req, res, next) => {
+  const {
+    inv_id,
+    classification_id,
+    inv_make,
+    inv_model,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_year,
+    inv_miles,
+    inv_color
+  } = req.body;
+
+  let errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav();
+
+    res.render("./inventory/edit-inventory", {
       errors: errors.array(),
-      title: "Add New Classification",
+      title: 'Modify' + inv_make + inv_model,
       nav,
-      grid,
+      inv_id,
       classification_id,
       inv_make,
       inv_model,

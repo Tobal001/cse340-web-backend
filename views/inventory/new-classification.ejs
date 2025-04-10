@@ -1,0 +1,13 @@
+   <div>
+    <p>Field is Required.</p>
+    <form id="class-form" action="/inv/add-classification" method="post">
+        <label for="classification_name">Classification Name:</label>
+        <p>Name Must Be Alphabetic characters Only*</p>
+        <input type="text" id="classificationName" name="classification_name"
+            pattern="^[A-Za-z]+$" title="Only letters A–Z allowed. No spaces, numbers, or special characters."
+            required
+        >
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+</div>

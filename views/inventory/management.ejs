@@ -1,0 +1,13 @@
+<%- messages() %>
+<h1>Managment</h1>
+<ul>
+    <a href="/inv/add/classification"><li>Add New Classification</li></a>
+    <a href="/inv/add/vehicle"><li>Add New Vehicle</li></a>
+</ul>
+
+<h2>Manage Inventory</h2>
+<p>Select a classification</p>
+<%- classificationSelect %>
+<table id="inventoryDisplay"></table>
+<noscript>JavaScript must be enabled to use this page.</noscript>
+<script src="../../js/inventory.js"></script>

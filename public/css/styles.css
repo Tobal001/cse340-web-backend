@@ -50,7 +50,9 @@ h6 {
 p,
 a,
 li,
-label {
+label,
+th,
+td {
   font-family: var(--primary-font);
   color: var(--primary-color);
 }

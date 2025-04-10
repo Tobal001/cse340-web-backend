@@ -54,6 +54,20 @@ validate.registationRules = () => {
     ]
   }
 
+  validate.loginRules = () => {
+    return [
+      body("account_email")
+        .trim()
+        .isEmail()
+        .withMessage("A valid email is required."),
+      
+      body("account_password")
+        .trim()
+        .notEmpty()
+        .withMessage("Password cannot be empty.")
+    ]
+  }
+
   /* ******************************
  * Check data and return errors or continue to registration
  * ***************************** */
@@ -70,6 +84,25 @@ validate.checkRegData = async (req, res, next) => {
         account_firstname,
         account_lastname,
         account_email,
+      })
+      return
+    }
+    next()
+  }
+
+validate.checkLoginData =  async (req, res, next) => {
+  const {account_email, account_password} = req.body
+  let errors = []
+  errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      let nav = await utilities.getNav()
+      req.flash("notice", "Please fix the errors below.")
+      res.render("account/login", {
+        title: "Login",
+        nav,
+        errors: errors.array(),
+        account_email,
+        account_password
       })
       return
     }
