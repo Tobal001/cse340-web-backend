@@ -43,6 +43,11 @@ router.get('/add/classification', utilities.handleErrors(invController.buildNewC
  *************************/
 router.get('/add/vehicle', utilities.handleErrors(invController.buildNewInventory));
 
+/* ***********************
+ * Route to display the form for deleting a vehicle
+ *************************/
+router.get('/delete/:inv_id', utilities.handleErrors(invController.buildDeleteInventory));
+
 
 
 /* ***********************
@@ -60,20 +65,26 @@ router.post("/add-classification",
  * Applies validation rules and error handling middleware
  *************************/
 
-router.post('/add-inventory',
+router.post('/add/vehicle',
     validate.inventoryItemRules(),
     validate.checkInventoryData,
     utilities.handleErrors(invController.addNewInventory)
 )
 
 /* ***********************
- * Route to update vehicle form submission
+ * Route to process update vehicle form submission
  *************************/
 
 router.post("/update", 
     validate.inventoryItemRules(),
     validate.checkUpdateData,
     utilities.handleErrors(invController.updateInventory))
+
+/* ***********************
+ * Route to process delete vehicle form submission
+ *************************/
+
+router.post("/delete", utilities.handleErrors(invController.deleteInventoryItem))
 
 
 module.exports = router;

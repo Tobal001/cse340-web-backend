@@ -3,13 +3,14 @@
     <form action="/inv/add/vehicle" method="post">
       <label for="classificationList">Classification</label>
       <select name="classification_id" id="classificationList" required>
-          <option value="">Choose a Classification</option>
-              <% classifications.forEach(c => { %>
-                  <option value="<%= locals.classification_id %>" <%= classification_id == c.classification_id ? 'selected' : '' %>>
-                  <%= c.classification_name %>
-          </option>
-          <% }) %>
-      </select>
+        <option value="">Choose a Classification</option>
+        <% classifications.forEach(c => { %>
+            <option value="<%= c.classification_id %>"
+              <%= formData && formData.classification_id == c.classification_id ? 'selected' : '' %>>
+              <%= c.classification_name %>
+            </option>
+        <% }) %>
+    </select>
       <br><br>
   
       <label for="inv_make">Make</label>
