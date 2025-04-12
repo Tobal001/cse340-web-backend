@@ -1,19 +1,12 @@
-        <h1>Account Management</h1>
-
-        <% if (locals.notice) { %>
-            <div class="flash-message">
-                <p><%= notice %></p>
-            </div>
-        <% } %>
-
-        <% if (errors && errors.length > 0) { %>
-            <div class="error-messages">
-                <ul>
-                    <% errors.forEach(error => { %>
-                        <li><%= error.msg %></li>
-                    <% }) %>
-                </ul>
-            </div>
-        <% } %>
-
-        <p>You're logged in</p>
+<h1>Account Management</h1>
+<%- messages() %>
+<% if (loggedin) { %>
+    <span>Welcome, <%= accountData.account_firstname %> | <a href="/account/logout">Logout</a></span>
+    <a href="/account/update"><p>Update Account Information</p></a>
+  <% } else { %>
+    <a href="/account/login">My Account</a>
+  <% } %>
+<% if (accountData.account_type === 'Admin') { %>
+  <h3>Inventory Management</h3>
+  <a href="/inv/"><p>Manage Inventory</p></a>
+<% } %>

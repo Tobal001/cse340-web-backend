@@ -80,30 +80,50 @@ async function accountLogin(req, res) {
   let nav = await utilities.getNav()
   const { account_email, account_password } = req.body
   const accountData = await accountModel.getAccountByEmail(account_email)
+
   if (!accountData) {
     req.flash("notice", "Please check your credentials and try again.")
-    res.status(400).render("account/login", {
+    return res.status(400).render("account/login", {
       title: "Login",
       nav,
       errors: null,
       account_email,
     })
-    return
   }
+
   try {
-    if (await bcrypt.compare(account_password, accountData.account_password)) {
-      delete accountData.account_password
-      const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 })
-      if(process.env.NODE_ENV === 'development') {
-        res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
-      } else {
-        res.cookie("jwt", accessToken, { httpOnly: true, secure: true, maxAge: 3600 * 1000 })
+    const isMatch = await bcrypt.compare(account_password, accountData.account_password)
+    if (isMatch) {
+      // Create a minimal payload
+      const payload = {
+        account_id: accountData.account_id,
+        account_email: accountData.account_email,
+        account_type: accountData.account_type,
+        account_firstname: accountData.account_firstname,
+        account_lastname: accountData.account_lastname
       }
+
+      const accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' })
+
+      res.cookie("jwt", accessToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV !== 'development',
+        maxAge: 3600 * 1000 // 1 hour
+      })
+
+      req.session.loggedin = true;
+      req.session.accountData = {
+        account_id: accountData.account_id,
+        account_email: accountData.account_email,
+        account_type: accountData.account_type,
+        account_firstname: accountData.account_firstname
+      };
+      
       return res.redirect("/account/")
-    }
-    else {
-      req.flash("message notice", "Please check your credentials and try again.")
-      res.status(400).render("account/login", {
+
+    } else {
+      req.flash("notice", "Please check your credentials and try again.")
+      return res.status(400).render("account/login", {
         title: "Login",
         nav,
         errors: null,
@@ -111,7 +131,14 @@ async function accountLogin(req, res) {
       })
     }
   } catch (error) {
-    throw new Error('Access Forbidden')
+    console.error("Login Error:", error)
+    req.flash("notice", "An error occurred. Please try again.")
+    res.status(500).render("account/login", {
+      title: "Login",
+      nav,
+      errors: null,
+      account_email,
+    })
   }
 }
 
@@ -119,14 +146,163 @@ async function accountLogin(req, res) {
  *  Deliver account management view
  * ************************************ */
 async function buildAccountManagement(req, res) {
-  let nav = await utilities.getNav()
-  res.render("account/management", {
-    title: "Account Management",
-    nav,
-    errors: null,
-    notice: req.flash("notice")
-  })
+  const nav = await utilities.getNav();
+
+  try {
+    const sessionData = res.locals.accountData || req.session.accountData;
+
+    if (!sessionData || !sessionData.account_id) {
+      req.flash("notice", "Please log in to access your account.");
+      return res.redirect("/account/login");
+    }
+
+    const accountData = await accountModel.getAccountById(sessionData.account_id);
+
+    if (!accountData) {
+      req.flash("notice", "Account not found.");
+      return res.redirect("/account/login");
+    }
+
+    const accountName = `${accountData.account_firstname} ${accountData.account_lastname}`;
+
+    res.render("account/management", {
+      title: "Account Management",
+      welcome: `Welcome, ${accountName}`,
+      nav,
+      errors: null,
+      accountData
+    });
+
+  } catch (error) {
+    console.error("Error loading account management:", error);
+    req.flash("notice", "Something went wrong. Please try again.");
+    return res.status(500).render("account/login", {
+      title: "Login",
+      nav,
+      errors: null,
+    });
+  }
 }
+
+/* ***************************
+ *  Build Update account view
+ * ************************** */
+async function updateAccount(req, res) {
+  const nav = await utilities.getNav();
+
+  try {
+    const sessionData = res.locals.accountData || req.session.accountData;
+
+    if (!sessionData || !sessionData.account_id) {
+      req.flash("notice", "Please log in to access your account.");
+      return res.redirect("/account/login");
+    }
+
+    const accountData = await accountModel.getAccountById(sessionData.account_id);
+
+    if (!accountData) {
+      req.flash("notice", "Account not found.");
+      return res.redirect("/account/login");
+    }
+
+    res.render("account/update", {
+      title: "Update Accounnt",
+      nav,
+      errors: null,
+      accountData
+    });
+
+  } catch (error) {
+    console.error("Error loading account management:", error);
+    req.flash("notice", "Something went wrong. Please try again.");
+    return res.status(500).render("account/login", {
+      title: "Login",
+      nav,
+      errors: null,
+    });
+  }
+}
+
+/* ****************************************
+*  Process update password
+* *************************************** */
+async function updatePassword(req, res) {
+  const nav = await utilities.getNav();
+  const account_id = req.session.accountData.account_id;
+  const { account_password } = req.body;
+
+  try {
+    const hashedPassword = await bcrypt.hash(account_password, 10);
+    const updateResult = await accountModel.updatePassword(account_id, hashedPassword);
+
+    if (updateResult) {
+      req.flash("notice", "Password updated successfully.");
+      return res.redirect("/account/");
+    } else {
+      req.flash("notice", "Failed to update password.");
+      return res.status(400).render("account/update", {
+        title: "Update Account",
+        nav,
+        errors: null,
+      });
+    }
+  } catch (error) {
+    console.error("Password Update Error:", error);
+    req.flash("notice", "There was an error updating your password.");
+    return res.status(500).render("account/update", {
+      title: "Update Accounnt",
+      nav,
+      errors: null,
+    });
+  }
+}
+
+/* ****************************************
+ *  Process account details update
+ * ************************************ */
+async function updateAccountDetails(req, res) {
+  const nav = await utilities.getNav();
+  const account_id = req.session.accountData.account_id;
+  const { account_firstname, account_lastname, account_email } = req.body;
+
+  try {
+    const updateResult = await accountModel.updateAccountDetails(
+      account_id,
+      account_firstname,
+      account_lastname,
+      account_email
+    );
+
+    if (updateResult) {
+      // Update session data
+      req.session.accountData.account_firstname = account_firstname;
+      req.session.accountData.account_lastname = account_lastname;
+      req.session.accountData.account_email = account_email;
+
+      req.flash("notice", "Account information updated successfully.");
+      return res.redirect("/account/");
+    } else {
+      req.flash("notice", "Failed to update account information.");
+      return res.status(400).render("account/update", {
+        title: "Update Account",
+        nav,
+        accountData: req.body,
+        errors: null
+      });
+    }
+  } catch (error) {
+    console.error("Account Update Error:", error);
+    req.flash("notice", "An error occurred while updating your account.");
+    return res.status(500).render("account/update", {
+      title: "Update Account",
+      nav,
+      accountData: req.body,
+      errors: null
+    });
+  }
+}
+
+
 
 
 module.exports = { 
@@ -134,5 +310,8 @@ module.exports = {
     buildRegister,
     registerAccount,
     accountLogin,
-    buildAccountManagement
+    buildAccountManagement,
+    updateAccount,
+    updatePassword,
+    updateAccountDetails
  }

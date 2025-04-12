@@ -1,16 +1,16 @@
-<h1>Add New Vehicle</h1>
+<h1><%= title %></h1>
 <div>
     <p>All Fields are Required.</p>
     <form action="/inv/update" method="post">
         <label for="classificationList">Classification</label>
         <select name="classification_id" id="classificationList" required>
             <option value="">Choose a Classification</option>
-                <% classifications.forEach(c => { %>
-                    <option value="<%= itemData.classification_id %>" <%= classification_id == c.classification_id ? 'selected' : '' %>>
-                    <%= c.classification_name %>
-            </option>
+            <% classifications.forEach(c => { %>
+              <option value="<%= c.classification_id %>" <%= itemData.classification_id == c.classification_id ? 'selected' : '' %>>
+                <%= c.classification_name %>
+              </option>
             <% }) %>
-        </select>
+          </select>
       <br><br>
   
       <label for="inv_make">Make</label>
@@ -40,7 +40,7 @@
       <label for="inv_color">Color</label>
       <input type="text" id="inv_color" name="inv_color" value="<%= itemData.inv_color %>" required><br><br>
   
-      <button type="submit" disabled>Update Vehicle</button>
+      <button type="submit" >Update Vehicle</button>
       <input type="hidden" name="inv_id" value="<%= itemData.inv_id %>">
 
       <script src="/js/inv-update.js"></script>

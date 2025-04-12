@@ -14,7 +14,15 @@ router.get('/login', utilities.handleErrors(accountController.buildLogin));
  *************************/
 router.get('/registration', utilities.handleErrors(accountController.buildRegister));
 
-router.get("/", utilities.checkLogin, utilities.handleErrors(accountController.buildAccountManagement))
+/* ***********************
+ * Deliver registration View
+ *************************/
+router.get("/", utilities.handleErrors(accountController.buildAccountManagement))
+
+/* ***********************
+ * Deliver update account View
+ *************************/
+router.get("/update", utilities.handleErrors(accountController.updateAccount))
 
 /* ***********************
  * process the registration View
@@ -25,7 +33,9 @@ router.post('/register',
     utilities.handleErrors(accountController.registerAccount)
 )
 
-// Process the login attempt
+/* ***********************
+ * Process the login attempt
+ *************************/
 router.post(
     "/login",
       regValidate.loginRules(),
@@ -34,6 +44,33 @@ router.post(
 
 )
 
-    
+/* ***********************
+ * Process logout process
+ *************************/
+router.get("/logout", (req, res) => {
+    res.clearCookie("jwt");
+    req.session.destroy(() => {
+        res.redirect("/");
+    });
+});
+
+/* ***********************
+ * Process update Password
+ *************************/
+router.post(
+    "/update/password",
+    regValidate.passwordUpdateRules(),
+    utilities.handleErrors(accountController.updatePassword)
+  );
+
+  /* *******************************
+ * Process account update
+ * ****************************** */
+  router.post(
+    "/update",
+    regValidate.updateAccountRules(),
+    regValidate.checkUpdateAccountData,
+    utilities.handleErrors(accountController.updateAccountDetails)
+  );
 
 module.exports = router;

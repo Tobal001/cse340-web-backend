@@ -19,34 +19,43 @@ router.get('/detail/:inv_id', invController.buildByInventoryByInvId);
  * API route to fetch inventory data in JSON format by classification ID
  * Used for dynamic front-end features (e.g., dropdown filtering)
  *************************/
-router.get('/getInventory/:classification_id', utilities.handleErrors(invController.getInventoryJSON));
+router.get('/getInventory/:classification_id', 
+    utilities.handleErrors(invController.getInventoryJSON));
 
 /* ***********************
  * Route to load the inventory management view
- * Main inventory control panel for admin/staff
  *************************/
-router.get('/', invController.buildManagement);
+router.get('/', 
+    utilities.checkJWTToken, 
+    utilities.checkAdmin, 
+    utilities.handleErrors(invController.buildManagement)
+  );
+  
 
 /* ***********************
  * Route to load the edit form for a specific vehicle
  * Populates form with existing data to allow updates
  *************************/
-router.get('/edit/:inv_id', utilities.handleErrors(invController.buildEditInventory));
+router.get('/edit/:inv_id', 
+    utilities.handleErrors(invController.buildEditForm));
 
 /* ***********************
  * Route to display the form for adding a new classification
  *************************/
-router.get('/add/classification', utilities.handleErrors(invController.buildNewClass));
+router.get('/add/classification', 
+    utilities.handleErrors(invController.buildNewClass));
 
 /* ***********************
  * Route to display the form for adding a new vehicle
  *************************/
-router.get('/add/vehicle', utilities.handleErrors(invController.buildNewInventory));
+router.get('/add/vehicle', 
+    utilities.handleErrors(invController.buildNewInventory));
 
 /* ***********************
  * Route to display the form for deleting a vehicle
  *************************/
-router.get('/delete/:inv_id', utilities.handleErrors(invController.buildDeleteInventory));
+router.get('/delete/:inv_id', 
+    utilities.handleErrors(invController.buildDeleteInventory));
 
 
 

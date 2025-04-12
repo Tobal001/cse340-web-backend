@@ -1,25 +1,24 @@
 <div class="account">
-
-    <h1>register</h1>
-    <% if (errors) { %>
-        <ul class="notice">
-       <% errors.array().forEach(error => { %>
-         <li><%= error.msg %></li>
-      <%  }) %>
-       </ul>
-      <% } %>
-
-    <p>All Fields Are Required*</p>
-    <form id="registerForm" action="/account/register" method="post">
+    <h1><%= title %></h1>
+    <%- messages() %>
+    <form id="accountUpdate" action="/account/update/" method="post">
 
         <label for="account_firstname">First name:</label>
-        <input type="text" name="account_firstname" id="accountFirstname" required value="<%= locals.account_firstname %>">
+        <input type="text" name="account_firstname" id="accountFirstname" required value="<%= accountData.account_firstname %>">
         
         <label for="account_lastname">Last name:</label>
-        <input type="text" id="account_lastname" name="account_lastname" required value="<%= locals.account_lastname %>">
-        
+        <input type="text" id="account_lastname" name="account_lastname" required value="<%= accountData.account_lastname %>">
+
         <label for="account_email">Email:</label>
-        <input type="email" id="account_email" name="account_email" placeholder="example@email.com" required value="<%= locals.account_email %>">
+        <input type="email" id="account_email" name="account_email" placeholder="example@email.com" required value="<%= accountData.account_email %>">
+
+        <input type="hidden" name="account_id" value="<%= accountData.account_id %>">
+        <button type="submit" >Update Account</button>
+
+    </form>
+
+ 
+    <form id="passwordUpdate" action="/account/update/password" method="post">
         
         <label for="account_password">Password:</label>
         <input 
@@ -47,7 +46,8 @@
             </ul>
         </div>
         <br>
-        <button type="submit">Regester</button>
+        <button type="submit">Change Password</button>
+        <input type="hidden" name="account_id" value="<%= accountData.account_id %>">
     </form>
-
+</div>
 <script src="/js/script.js"></script>

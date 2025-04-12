@@ -90,7 +90,7 @@ invCont.buildManagement = async function (req, res, next){
   let nav = await utilities.getNav()
   const classificationSelect = await utilities.buildClassificationList()
   res.render('./inventory/management', {
-      title: 'management',
+      title: 'Inventory Management',
       nav,
       classificationSelect,
       errors: null,
@@ -219,6 +219,38 @@ invCont.addNewInventory = async function (req, res) {
   }
 };
 
+
+/* ***************************
+ *  Get Inventory in JSON format
+ * ************************** */
+invCont.getInventoryJSON = async function (req, res) {
+  const classification_id = parseInt(req.params.classification_id);
+  const inventoryData = await invModel.getInventoryByClassificationId(classification_id);
+  if (inventoryData.length > 0) {
+    return res.json(inventoryData);
+  } else {
+    return res.json([]);
+  }
+};
+
+/* ***************************
+ *  Update Inventory form
+ * ************************** */
+invCont.buildEditForm = async function (req, res) {
+  const inv_id = req.params.inv_id;
+  const nav = await utilities.getNav();
+  const itemData = await invModel.getInventoryByInvId(inv_id);
+  const classifications = (await invModel.getClassifications()).rows;
+
+  res.render("inventory/edit-inventory", {
+    title: `Edit ${itemData.inv_make} ${itemData.inv_model}`,
+    nav,
+    itemData,
+    classifications,
+    classification_id: itemData.classification_id,
+    errors: null
+  });
+}
 
 /* ***************************
  *  Update Inventory Data

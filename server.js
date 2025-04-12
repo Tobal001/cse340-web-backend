@@ -43,6 +43,13 @@ app.use(function(req, res, next){
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
+app.use((req, res, next) => {
+  res.locals.loggedin = req.session.loggedin || false;
+  res.locals.accountData = req.session.accountData || {};
+  next();
+});
+
+
 /* ***********************
  * View Engine and Templates
  *************************/

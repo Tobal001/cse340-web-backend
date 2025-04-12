@@ -132,25 +132,36 @@ Util.handleErrors = (fn) => (req, res, next) =>
 /* ****************************************
 * Middleware to check token validity
 **************************************** */
+// utilities/index.js
 Util.checkJWTToken = (req, res, next) => {
   if (req.cookies.jwt) {
-   jwt.verify(
-    req.cookies.jwt,
-    process.env.ACCESS_TOKEN_SECRET,
-    function (err, accountData) {
-     if (err) {
-      req.flash("Please log in")
-      res.clearCookie("jwt")
-      return res.redirect("/account/login")
-     }
-     res.locals.accountData = accountData
-     res.locals.loggedin = 1
-     next()
-    })
+    jwt.verify(
+      req.cookies.jwt,
+      process.env.ACCESS_TOKEN_SECRET,
+      (err, decoded) => {
+        if (err) {
+          res.clearCookie("jwt")
+          req.flash("notice", "Session expired. Please log in again.")
+          return res.redirect("/account/login")
+        }
+
+        res.locals.accountData = decoded
+        res.locals.loggedin = true
+
+        if (!req.session.accountData) {
+          req.session.loggedin = true
+          req.session.accountData = decoded
+        }
+
+        next()
+      }
+    )
   } else {
-   next()
+    res.locals.loggedin = false
+    next()
   }
- }
+}
+
 
  /* ****************************************
  *  Check Login
@@ -163,5 +174,19 @@ Util.checkJWTToken = (req, res, next) => {
     return res.redirect("/account/login")
   }
  }
+
+ /* ****************************************
+ *  Middleware to check if user is admin
+ * ************************************ */
+ Util.checkAdmin = (req, res, next) => {
+  const accountData = res.locals.accountData || req.session.accountData;
+
+  if (accountData && accountData.account_type === 'Admin') {
+    return next();
+  } else {
+    req.flash('notice', 'Access denied. Admins only.');
+    return res.redirect('/account/login');
+  }
+};
 
 module.exports = Util;
