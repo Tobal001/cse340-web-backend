@@ -19,6 +19,7 @@ const utilities = require('./utilities/index');
 const accountRoute = require('./routes/accountRoute')
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser')
+const reviewRoute = require('./routes/reviewRoute')
 
 
 /* ***********************
@@ -70,6 +71,8 @@ app.get('/', utilities.handleErrors(baseController.buildHome));
 app.use('/inv', inventoryRoute);
 //Account Login Route
 app.use('/account', accountRoute);
+//Review route
+app.use('/review', reviewRoute);
 // File Not Found Route - must be last route in list
 app.get('/error-505', (req, res, next) => {
   next({

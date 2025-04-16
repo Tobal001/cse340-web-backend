@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 const invModel = require('../models/inventory-model');
+const reviewModel = require('../models/review-model')
 const Util = {};
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
@@ -188,5 +189,68 @@ Util.checkJWTToken = (req, res, next) => {
     return res.redirect('/account/login');
   }
 };
+
+/* ************************
+ * Constructs an HTML unordered list of reviews
+ ************************** */
+Util.getReviewList = async function (inv_id, account_id) {
+  try {
+    const reviews = await reviewModel.getVehicleReviews(inv_id, account_id);
+
+    let list = `
+      <div class="review-list">
+        <h2>Customer Reviews</h2>
+        <ul class="review-ul">
+    `;
+
+    if (reviews.length === 0) {
+      list += `
+        <li>No reviews yet. Be the first to write one!</li>
+        </ul>
+        <a href="/review/new/${inv_id}" class="write-review-link">Write Review</a>
+      `;
+    } else {
+      for (const review of reviews) {
+        const reviewerName = `${review.account_firstname} ${review.account_lastname}`;
+        const isOwner = String(review.account_id) === String(account_id);
+
+        list += `
+          <li class="review-item">
+            <input type="hidden" name="review_id" value="${review.review_id}" />
+            <p><strong>${reviewerName}</strong> (${new Date(review.review_time_stamp).toLocaleDateString()})</p>
+            <p>Rating: ${review.review_rating} / 5</p>
+            <p>${review.review_text}</p>
+        `;
+
+        if (isOwner) {
+          list += `
+            <div class="review-actions">
+              <a href="/review/edit/${review.review_id}">Edit</a> |
+              <a href="/review/delete/${review.review_id}">Delete</a>
+            </div>
+          `;
+        }else list += ''
+
+        list += `</li>`;
+      }
+
+      list += `</ul>
+        <a href="/review/new/${inv_id}" class="write-review-link">Write Review</a>
+      `;
+    }
+
+    list += `</div>`;
+    return list;
+  } catch (error) {
+    console.error('Error building review list:', error);
+    return `
+      <div class="review-list">
+        <h2>Customer Reviews</h2>
+        <ul><li>Unable to load reviews at this time.</li></ul>
+      </div>
+    `;
+  }
+};
+
 
 module.exports = Util;

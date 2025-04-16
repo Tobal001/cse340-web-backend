@@ -25,6 +25,7 @@ invCont.buildByClassificationId = async function (req, res, next) {
       title: `${className} vehicles`,
       nav,
       grid,
+      reviewList: "",
       errors: null,
     });
   } catch (error) {
@@ -33,52 +34,25 @@ invCont.buildByClassificationId = async function (req, res, next) {
   }
 };
 
-/* ***************************
- *  Build inventory
- * ************************** */
-invCont.buildByInventoryByInvId = async function (req, res, next) {
+invCont.buildByInventoryId = async function (req, res, next) {
   const inv_id = parseInt(req.params.inv_id);
-
-  if (isNaN(inv_id)) {
-    console.error("Invalid inv_id:", req.params.inv_id);
-    const nav = await utilities.getNav();
-    req.flash("notice", "Invalid vehicle ID.");
-    return res.status(400).render('./inventory/inventory', {
-      title: "Vehicle Not Found",
-      nav,
-      grid: "<p>No details available.</p>",
-      errors: null
-    });
-  }
+  const account_id = req.session.accountData?.account_id || null;
 
   try {
-    const data = await invModel.getInventoryByInvId(inv_id);
-
-    if (!data || data.length === 0) {
-      const nav = await utilities.getNav();
-      req.flash("notice", "Vehicle not found.");
-      return res.status(404).render('./inventory/inventory', {
-        title: "Vehicle Not Found",
-        nav,
-        grid: "<p>No details available for this vehicle.</p>",
-        errors: null
-      });
-    }
-
-    const vehicle = data[0];
-
-    const grid = await utilities.buildInventoryGrid(vehicle);
+    const vehicleData = await invModel.getVehicleById(inv_id);
+    const grid = await utilities.buildInventoryGrid(vehicleData);
+    const reviewList = await utilities.getReviewList(inv_id, account_id);
     const nav = await utilities.getNav();
 
-    res.render('./inventory/inventory', {
-      title: `${vehicle.inv_year} ${vehicle.inv_make} ${vehicle.inv_model}`,
+    res.render('inventory/inventory', {
+      title: `${vehicleData.inv_make} ${vehicleData.inv_model}`,
       nav,
       grid,
+      reviewList,
       errors: null
     });
-
   } catch (error) {
-    console.error("getInventoryByInvId error", error);
+    console.error("Error building vehicle detail page:", error);
     next(error);
   }
 };

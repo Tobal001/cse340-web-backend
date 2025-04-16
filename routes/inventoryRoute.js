@@ -13,7 +13,7 @@ router.get('/type/:classificationId', invController.buildByClassificationId);
 /* ***********************
  * Route to view a single vehicle's detail page (e.g., /inv/detail/101)
  *************************/
-router.get('/detail/:inv_id', invController.buildByInventoryByInvId);
+router.get('/detail/:inv_id', invController.buildByInventoryId);
 
 /* ***********************
  * API route to fetch inventory data in JSON format by classification ID

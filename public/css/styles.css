@@ -332,6 +332,91 @@ form p {
   color: var(--secondary-color);
 }
 
+/* ***********************
+ * Forms 
+ *************************/
+.review-list {
+  margin: 2rem 0;
+  padding: 1rem;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.review-list h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #333;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 0.5rem;
+}
+
+.review-ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.review-item {
+  border-bottom: 1px solid #eee;
+  padding: 1rem 0;
+}
+
+.review-item:last-child {
+  border-bottom: none;
+}
+
+.review-item p {
+  margin: 0.25rem 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #444;
+}
+
+.review-item strong {
+  font-weight: 600;
+  color: #222;
+}
+
+.write-review-link {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #2e6da4;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.write-review-link:hover {
+  background-color: #204d74;
+}
+
+.review-actions {
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.review-actions a {
+  color: #007BFF;
+  text-decoration: none;
+  margin-right: 0.5rem;
+  transition: color 0.2s ease;
+}
+
+.review-actions a:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+.review-actions a:last-child {
+  margin-right: 0;
+}
+
+
 
 @media screen and (min-width: 768px) {
   .nav-ul {

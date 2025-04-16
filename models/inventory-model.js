@@ -30,7 +30,7 @@ async function getInventoryByClassificationId(classification_id) {
 /* ***************************
  *  Get all inventory items
  * ************************** */
-async function getInventoryByInvId(inv_id) {
+async function getVehicleById(inv_id) {
   try {
     const data = await pool.query(
       `SELECT * FROM public.inventory 
@@ -152,14 +152,14 @@ async function deleteInventoryItem(inv_id) {
     const data = await pool.query(sql, [inv_id])
   return data
   } catch (error) {
-    new Error("Delete Inventory Error")
+    new error("Delete Inventory Error")
   }
 }
 
 module.exports = {
   getClassifications,
   getInventoryByClassificationId,
-  getInventoryByInvId,
+  getVehicleById,
   postNewClass,
   postNewInventoryItem,
   updateInventory,
